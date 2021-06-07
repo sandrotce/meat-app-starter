@@ -39,15 +39,21 @@ export class RestaurantsService {
     Restaurants(): Observable<Restaurant[]> {
     //Restaurants(): Restaurant[] {
       //return this.rests; //esta versão e para pegar o array fixo, texto1
-      return this.http.get(`${MEAT_API}/rest/frest/?cOp=rest&cId=''`)
+      //return this.http.get(`${MEAT_API}/rest/frest/?cOp=rest&cId=''`)
+      return this.http.get(`${MEAT_API}/restaurants`)
       .map(response=> response.json())
       .catch(ErrorHandler.handeError)
     }
+
     restaurantById(id: string): Observable<Restaurant> {
       console.log('Este é o id passado:' + id)
-      console.log('url:' + `${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
-      return this.http.get(`${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
+      //console.log('url:' + `${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
+      //return this.http.get(`${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
+      return this.http.get(`${MEAT_API}/restaurants/${id}`)
       .map(response=> response.json())
       .catch(ErrorHandler.handeError)
+    }
+    reviewsOfRestaurant(id:string) : Observable<any>{
+      return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
     }
 }
