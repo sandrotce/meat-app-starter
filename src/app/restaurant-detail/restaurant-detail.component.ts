@@ -15,7 +15,8 @@ export class RestaurantDetailComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.restaurantservice.restaurantById(this.route.snapshot.params['id']).subscribe(restaurant => this.restaurant = restaurant)
+    this.restaurantservice.restaurantById(this.route.snapshot.params['id'])
+    .subscribe(restaurant => this.restaurant = restaurant)
   }
 
 }
