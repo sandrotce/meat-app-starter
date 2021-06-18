@@ -7,6 +7,6 @@
  <ng-content></ng-content>
 
 
-  <span class="help-block" *ngIf="input2.valid && (input2.dirty || input2.touched)"><i class="fa fa-check"></i> Ok</span>
-  <span class="help-block" *ngIf="!input2.valid && (input2.dirty || input2.touched)"><i class="fa fa-remove"></i> Campo obrigatório</span>
+  <span class="help-block" *ngIf="input2.valid && (input2.dirty || input2.touched)"><i class="fa fa-check"></i>Ok</span>
+  <span class="help-block" *ngIf="!input2.valid && (input2.dirty || input2.touched)"><i class="fa fa-remove"></i> {{errorMessage}}</span>
 </div>
