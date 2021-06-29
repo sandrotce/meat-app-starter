@@ -5,15 +5,10 @@
 <section class="content">
   <section class="invoice">
 
-       <!--{{form.valid}}
-       {{form.value | json}}-->
+       {{form.valid}}
+       {{form.value | json}}
 
-       {{orderForm.valid}}
-       {{orderForm.value | json}}
-
-        <!--<form #form="ngForm" novalidate> antes do 72 - ReactiveForms -->
-
-        <form [formGroup]="orderForm" novalidate>
+        <form #form="ngForm" novalidate>
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
@@ -22,59 +17,21 @@
             </div>
           </div>
 
-         <!-- 72 - ReactiveForms  inicio -->
-          <div class="row">
-
-            <div class="col-xs-12 col-sm-9">
-              <p class="lead"> Seus Dados:</p>
-            </div>
-
-            <div class="col-xs-12 col-sm-3">
-                <span class="help-block pull-right has-error-block" *ngIf="orderForm.hasError('emailNotValid')"><i class="fa fa-remove"></i> e-mails não conferem</span>
-            </div>
-
-
-            <div class="col-sm-6 col-xs-12">
-              <mt-input-container errorMessage="Campo obrigatório com no minimo 5 caracteres" label="name">
-                 <input placeholder="name" formControlName="name" class="form-control"  autocomplete="off">
-              </mt-input-container>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-              <mt-input-container label="E-mail" errorMessage="e-mail invalido" >
-                 <input type="text" placeholder="e-mail"  formControlName="email"
-                     class="form-control"  autocomplete="off">
-              </mt-input-container>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-              <mt-input-container label="E-mail" errorMessage="e-mail invalido" >
-                 <input type="text" placeholder="Confirmação do e-mail"  formControlName="emailConfirmation"
-                     class="form-control"  autocomplete="off">
-              </mt-input-container>
-            </div>
-
-          </div>
-          <!-- 72 - ReactiveForms Fim-->
-
-
-
-          <!--<div class="row invoice-info"> antes do 72 - ReactiveForms-->
-          <div class="row ">
+          <div class="row invoice-info">
             <div class="col-xs-12">
               <p class="lead">Endereço de Entrega:</p>
             </div>
             <div class="col-sm-6 col-xs-12">
 
               <mt-input-container errorMessage="Campo obrigatório com no minimo 5 caracteres" label="Endereço">
-                 <input placeholder="Endereço-x" formControlName="address" class="form-control"  autocomplete="off">
+                 <input placeholder="Endereço-x" name="adddres" class="form-control" ngModel required minlength="5" autocomplete="off">
               </mt-input-container>
 
             </div>
             <div class="col-sm-3 col-xs-6">
               <mt-input-container label="Número" errorMessage="Obrigatório somente números" >
-                 <input type="text" placeholder="Número-x"  formControlName="number"
-                     class="form-control" autocomplete="off">
+                 <input type="text" placeholder="Número-x" pattern="^[0-9]*$" name="number"
+                     class="form-control" ngModel required autocomplete="off">
               </mt-input-container>
 
               <!-- este é o antigo antes de usar <ng-content></ng-content>
@@ -88,8 +45,8 @@
             </div>
             <div class="col-sm-4 col-xs-6">
               <mt-input-container label="Complemento" errorMessage="" >
-                 <input type="text" placeholder="Complemento-x"  formControlName="optionalAddress"
-                     class="form-control" autocomplete="off">
+                 <input type="text" placeholder="Complemento-x"  name="optionAddress"
+                     class="form-control" ngModel autocomplete="off">
               </mt-input-container>
               <!--
               <div class="form-group has-error">
@@ -121,7 +78,7 @@
               <p class="lead">Formas de Pagamento:</p>
 
                 <div class="form-group">
-                  <mt-radio [options]="paymentOptions" formControlName="paymentOption" ></mt-radio>
+                  <mt-radio [options]="paymentOptions" name="paymentOption" ngModel></mt-radio>
                   <!--
                    <div>
                      <label>
@@ -172,8 +129,7 @@
 
         <div class="row">
           <div class="col-xs-12">
-            <button (click)="CheckOrder(orderForm.value)"class="btn btn-success pull-right"
-                  [disabled]="!orderForm.valid">
+            <button (click)="CheckOrder(form.value)"class="btn btn-success pull-right" [disabled]="!form.valid">
               <i class="fa fa-credit-card"></i>
               Concluir Pedido
             </button>
