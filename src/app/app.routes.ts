@@ -6,8 +6,9 @@ import {RestaurantsComponent} from './restaurants/restaurants.component'
 import {RestaurantDetailComponent} from './restaurant-detail/restaurant-detail.component'
 import {ReviewsComponent} from './restaurant-detail/reviews/reviews.component'
 import {MenuComponent} from './restaurant-detail/menu/menu.component'
-import {OrderComponent} from './order/order.component'
+//import {OrderComponent} from './order/order.component'
 import {OrderSumaryComponent} from './order-sumary/order-sumary.component'
+import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +19,12 @@ export const ROUTES: Routes = [
       {path: 'menu',component: MenuComponent},
       {path: 'reviews',component: ReviewsComponent}
     ]},
-  {path: 'order', component: OrderComponent},
   {path: 'order-sumary', component: OrderSumaryComponent},
-  {path: 'about', loadChildren: './about/about.module#AboutModule'}
+  {path: 'about', loadChildren: './about/about.module#AboutModule'}, // quando necessitamos de criar as dependencias apenas
+  //quando formos usar uma paginas para não sobrecarregar a inicialização da pagina "Lazy-Loading", poderá ser feita em
+  //um momento posterior, se diferentes usuários não acessam todas as paginas, podemos com modulos dividir a inicializaçãoptimize
+  //da aplicação em partes.
+  //{path: 'order', loadChildren: './order/Order.module#OrderModule'},
+//  {path: 'order', loadChildren: './order/Order.module#OrderModule'},
+  {path: '**', component: NotFoundPageComponent} // tem que ficar no final das rotas.
 ]
