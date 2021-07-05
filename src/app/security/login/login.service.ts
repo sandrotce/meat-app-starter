@@ -15,7 +15,8 @@ export class LoginService{
 
   user : User
 
-  constructor(private http: HttpClient, private router : Router){}
+  constructor(private http: HttpClient,
+              private router : Router){}
 
   isLoggedIn() : boolean {
     return this.user !== undefined
@@ -28,9 +29,10 @@ export class LoginService{
                       .do(user => this.user = user) // desta forma com o do() conseguimos pegar o retorno do metodo post e gravar no this.user.
   }
 
-  handleLogin(){
-
-    this.router.navigate(['/login'])
+  handleLogin(path? : string){
+    console.log('handleLogin: 33' + path)
+    this.router.navigate(['/login', path]) // passo 2 - 120 - to - navegar de volta ao pedido, veio para aqui o path, contém a rota de concluir pedido.
+                                          //por [routerLink] seria desta forma:   <a [routerLink]="['/restaurants',restaurant.id]">
 
   }
 

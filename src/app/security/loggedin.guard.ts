@@ -14,8 +14,10 @@ export class LoggedInGuard implements CanLoad {
     let loggedIn = this.loginService.isLoggedIn()
 
     if (!loggedIn)
-       this.loginService.handleLogin()
-    else{
+    {
+       console.log('Patch anterior: ' + `${route.path}`)
+       this.loginService.handleLogin(`/${route.path}`) // passo: 1 - 120 - to - navegar de volta ao pedido, aqui pegamos a rota que estava quando não conseguiu logar
+    }else{
       return loggedIn
     }
 
