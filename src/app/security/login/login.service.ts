@@ -31,7 +31,7 @@ export class LoginService{
 
   handleLogin(path? : string){
     console.log('handleLogin: 33' + path)
-    this.router.navigate(['/login', path]) // passo 2 - 120 - to - navegar de volta ao pedido, veio para aqui o path, contém a rota de concluir pedido.
+    this.router.navigate(['/login', btoa(path)]) // passo 2 - 120 - to - navegar de volta ao pedido, veio para aqui o path, contém a rota de concluir pedido.
                                           //por [routerLink] seria desta forma:   <a [routerLink]="['/restaurants',restaurant.id]">
 
   }

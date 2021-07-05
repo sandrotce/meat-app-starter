@@ -31,6 +31,6 @@ export const ROUTES: Routes = [
   //um momento posterior, se diferentes usuários não acessam todas as paginas, podemos com modulos dividir a inicializaçãoptimize
   //da aplicação em partes.
   {path: 'order', loadChildren: './order/Order.module#OrderModule',
-    canLoad: [LoggedInGuard]}, // se não estiver logado não deixa criar o módulo de OrderModule
+    canLoad: [LoggedInGuard],  canActivate:[LoggedInGuard]}, // se não estiver logado não deixa criar o módulo de OrderModule
   {path: '**', component: NotFoundPageComponent} // tem que ficar no final das rotas.
 ]
