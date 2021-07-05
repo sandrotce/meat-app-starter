@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core'
-import {Http, Headers, RequestOptions} from "@angular/http"
+import {HttpClient, HttpHeaders} from "@angular/common/http"
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 
@@ -7,12 +7,15 @@ import {ShoppingCartService} from '../restaurant-detail/shopping-cart/shopping-c
 import {CartItem} from '../restaurant-detail/shopping-cart/cart-item.model'
 import {Order,OrderItem} from './order.model'
 import {MEAT_API} from '../app.api'
+import {LoginService} from '../security/login/login.service'
 
 @Injectable()
 
 export  class OrderService{
 
-  constructor(private cartService : ShoppingCartService, private http: Http) {}
+  constructor(private cartService : ShoppingCartService,
+              private http: HttpClient,
+              private loginservice : LoginService) {}
 
   CartItems() : CartItem[] {
     return this.cartService.items
@@ -37,16 +40,15 @@ export  class OrderService{
     this.cartService.clear()
   }
 
-  checkOrder(order: Order): Observable<string> { 
-    const headers = new Headers()
-    headers.append('Content-Type','application/json')
-    console.log('stringfy: ' + JSON.stringify(order))
-    //return JSON.stringify(order)
-    return this.http.post(`${MEAT_API}/orders/`,
-                          JSON.stringify(order),
-                          new RequestOptions({headers:headers}))
-                          .map(response=> response.json())
-                          .map(order => order.id)
+  checkOrder(order: Order): Observable<string> {
+
+    let headers = new HttpHeaders()
+
+    if (this.loginservice.isLoggedIn()){
+        headers = headers.set('Authorization', `Bearer ${this.loginservice.user.accesstoken}`)
+    }
+    return this.http.post<Order>(`${MEAT_API}/orders/`,order, {headers : headers}) // {headers : headers} isto em chaves são propriedades do método post.
+                          .map(order =>order.id)
   }
 
 }

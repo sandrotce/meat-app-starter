@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-
+// para transoformar essa classe em modulo temos de improtar import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router'
 
 import {AboutComponent} from './about.component'

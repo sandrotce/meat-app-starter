@@ -1,18 +1,19 @@
-//import {NgModule} from '@angular/core'
-//import {SharedModule} from '../shared/shared.module'
-//import {RouterModule, Routes} from '@angular/router'
+import {NgModule} from '@angular/core'
+import {RouterModule, Routes} from '@angular/router'
 
-//import {OrderComponent} from './Order.Component'
-//import {OrderItemsComponent} from './order-items/order-items.component'
-//import {DeliveryCostComponent} from './delivery-cost/delivery-cost.component'
+import {SharedModule} from '../shared/shared.module'
 
-//const ROUTES : Routes = [/
-  //{path: '', component : OrderComponent}
-//]
+import {OrderComponent} from './Order.Component'
+import {OrderItemsComponent} from './order-items/order-items.component'
+import {DeliveryCostComponent} from './delivery-cost/delivery-cost.component'
 
-//@NgModule ({
-//  declarations : [OrderComponent,OrderItemsComponent,DeliveryCostComponent],
-//  imports : [SharedModule, RouterModule.forChild(ROUTES)]
-//})
+const ROUTES : Routes = [
+  {path: '', component : OrderComponent}
+]
 
-//export class OrderModule {}
+@NgModule ({
+  declarations : [OrderComponent,OrderItemsComponent,DeliveryCostComponent],
+  imports : [SharedModule, RouterModule.forChild(ROUTES)]
+})
+
+export class OrderModule {}

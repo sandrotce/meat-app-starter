@@ -4,7 +4,7 @@ class Order {
   public optionAddress: string;
   public paymentOption: string;
   public OderItems : OrderItem[] = []
-
+  public id? :string
 }
 
 class OrderItem{

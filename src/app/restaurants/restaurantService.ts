@@ -1,6 +1,6 @@
 //indo para usar o http.get com json
 import {Injectable} from '@angular/core'
-import {Http} from '@angular/http'
+import {HttpClient, HttpParams} from '@angular/common/http'
 import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch' // aula 44 erros
@@ -36,37 +36,37 @@ export class RestaurantsService {
                           }
     ]*/
     //Fim texto1
-    constructor( private http : Http){}
+    constructor( private http : HttpClient){}
 
-    Restaurants(): Observable<Restaurant[]> {
-    //Restaurants(): Restaurant[] {
+    Restaurants(search?:string): Observable<Restaurant[]> {
+     //Restaurants(): Restaurant[] {
       //return this.rests; //esta versão e para pegar o array fixo, texto1
       //return this.http.get(`${MEAT_API}/rest/frest/?cOp=rest&cId=''`)
-      return this.http.get(`${MEAT_API}/restaurants`)
-      .map(response=> response.json())
-      .catch(ErrorHandler.handeError)
+      let params : HttpParams = undefined
+      if (search) {
+        params = new HttpParams().append('q',search)
+      }
+      return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {params: params})
     }
 
     restaurantById(id: string): Observable<Restaurant> {
       //console.log('Este é o id passado:' + id)
       //console.log('url:' + `${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
       //return this.http.get(`${MEAT_API}/rest/frest/?cOp=resta&cId=${id}`)
-      return this.http.get(`${MEAT_API}/restaurants/${id}`)
-      .map(response=> response.json())
-      .catch(ErrorHandler.handeError)
+      return this.http.get<Restaurant>(`${MEAT_API}/restaurants/${id}`)
+      //httpclient não precisa de:.map(response=> response.json())
+      //httpclient não precisa de:.catch(ErrorHandler.handeError)
     }
 
     reviewsOfRestaurant(id:string) : Observable<any>{
       console.log('Este é o id passado reviewsOfRestaurant:' + id)
       return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)
-      .map(response=> response.json())
-      .catch(ErrorHandler.handeError)
     }
 
     menuOfRestaurant(id:string) : Observable<MenuItem[]>{
       //console.log('Este é o id passado reviewsOfRestaurant:' + id)
-      return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
-      .map(response=> response.json())
-      .catch(ErrorHandler.handeError)
+      return this.http.get<MenuItem[]>(`${MEAT_API}/restaurants/${id}/menu`);
+      // httpclient não precisa de:        .map(response=> response.json())
+      // httpclient não precisa de:        .catch(ErrorHandler.handeError)
     }
 }
