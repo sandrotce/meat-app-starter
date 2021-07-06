@@ -16,7 +16,11 @@ export class LoginService{
   user : User
 
   constructor(private http: HttpClient,
-              private router : Router){}
+              private router : Router){
+
+    this.router.events.subscribe(e => console.log(e))
+
+  }
 
   isLoggedIn() : boolean {
     return this.user !== undefined
@@ -27,6 +31,10 @@ export class LoginService{
       return this.http.post<User>(`${MEAT_API}/login/`,
                        {email : email, password : password} )
                       .do(user => this.user = user) // desta forma com o do() conseguimos pegar o retorno do metodo post e gravar no this.user.
+  }
+
+  logout(){
+    this.user = undefined
   }
 
   handleLogin(path? : string){

@@ -22,6 +22,7 @@ import { OrderSumaryComponent } from './order-sumary/order-sumary.component';
 import {SharedModule} from './shared/shared.module';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { LoginComponent } from './security/login/login.component';
     ReviewsComponent,
     OrderSumaryComponent,
     NotFoundPageComponent,
-    LoginComponent
+    LoginComponent,
+    UserDetailComponent
   ],
   //não preciso mais importar aqui o FormsModule,ReactiveFormsModule, pois estão sendo importados no sharedModule
   imports: [

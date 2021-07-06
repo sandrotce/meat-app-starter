@@ -15,7 +15,7 @@ export class LoggedInGuard implements CanLoad, CanActivate {
 
          if (!loggedIn)
          {
-            console.log('Patch anterior: ' + `${path}`)
+            console.log('Patch anterior::: ' + `${path}`)
             this.loginService.handleLogin(`/${path}`) // passo: 1 - 120 - to - navegar de volta ao pedido, aqui pegamos a rota que estava quando não conseguiu logar
          }else{
            return loggedIn
