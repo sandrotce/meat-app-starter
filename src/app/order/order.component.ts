@@ -8,6 +8,8 @@ import {OrderService } from './order.service'
 import {CartItem } from '../restaurant-detail/shopping-cart/cart-item.model'
 import {Order, OrderItem } from './order.model'
 
+import 'rxjs/add/operator/do'
+
 @Component({
   selector: 'mt-order',
   templateUrl: './order.component.html'
@@ -19,6 +21,7 @@ export class OrderComponent implements OnInit {
 
   orderForm : FormGroup // 72 - ReactiveForms
   delivery : number = 8
+  orderId  : string
 
   paymentOptions : RadioOption[] = [
     {label: 'Dinheiro', value:'MON'},
@@ -70,20 +73,25 @@ export class OrderComponent implements OnInit {
     this.orderService.remove(item)
   }
 
+  isOrderCompleted(){
+    return this.orderId !== undefined
+  }
   CheckOrder(order:Order){
+
     order.OderItems = this.CartItems()
       .map((item:CartItem)=> new OrderItem(item.quantity, item.menuItem.id) )
 
       this.orderService.checkOrder(order)
-
+      .do( (orderId: string) =>{
+        console.log("checkorder 85 : " + orderId)
+        this.orderId = orderId
+          })
       .subscribe(  (orderId: string) =>
                   {
                       this.router.navigate(['/order-sumary'])
                       console.log(`Compra concluida: ${orderId}`)
                       this.orderService.clear()
-                  }
-                )
+                  })
 
-    //console.log(order)
   }
 }

@@ -15,6 +15,7 @@ import { RestaurantsService} from '../restaurants/restaurantService';
 import {LoginService} from '../security/login/login.service'
 
 import {LoggedInGuard} from '../security/loggedin.guard'
+import {LeaveOrderGuard} from '../order/leave-order.guard'
 
 @NgModule ({
   declarations : [InputComponent, RadioComponent, RatingComponent],
@@ -31,7 +32,8 @@ export class SharedModule {
                   ShoppingCartService,
                   OrderService,
                   LoginService,
-                  LoggedInGuard]
+                  LoggedInGuard,
+                  LeaveOrderGuard]
     }
   }
 }
