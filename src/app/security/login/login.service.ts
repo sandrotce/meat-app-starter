@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from "@angular/common/http"
 import {Observable} from 'rxjs/Observable'
-import {Router} from '@angular/router'
+import {Router, NavigationEnd} from '@angular/router'
 
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/filter'
 
 import {MEAT_API} from '../../app.api'
 import {User} from './user.model'
@@ -14,11 +15,13 @@ import {User} from './user.model'
 export class LoginService{
 
   user : User
+  lastUrl : string
 
   constructor(private http: HttpClient,
               private router : Router){
 
-    this.router.events.subscribe(e => console.log(e))
+    this.router.events.filter(e => e instanceof NavigationEnd)
+                      .subscribe( (e : NavigationEnd) => this.lastUrl = e.url)
 
   }
 
@@ -37,7 +40,7 @@ export class LoginService{
     this.user = undefined
   }
 
-  handleLogin(path? : string){
+  handleLogin(path : string = this.lastUrl){
     console.log('handleLogin: 33' + path)
     this.router.navigate(['/login', btoa(path)]) // passo 2 - 120 - to - navegar de volta ao pedido, veio para aqui o path, contém a rota de concluir pedido.
                                           //por [routerLink] seria desta forma:   <a [routerLink]="['/restaurants',restaurant.id]">
