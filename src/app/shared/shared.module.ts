@@ -14,6 +14,8 @@ import { OrderService} from '../order/order.service';
 import { ShoppingCartService} from '../restaurant-detail/shopping-cart/shopping-cart.service';
 import { RestaurantsService} from '../restaurants/restaurantService';
 //import {SanackbarComponent} from
+import {NotificationService} from './messages/notification.service'
+
 import {LoginService} from '../security/login/login.service'
 
 import {LoggedInGuard} from '../security/loggedin.guard'
@@ -34,6 +36,7 @@ export class SharedModule {
       providers: [RestaurantsService,
                   ShoppingCartService,
                   OrderService,
+                  NotificationService,
                   LoginService,
                   LoggedInGuard,
                   LeaveOrderGuard,
