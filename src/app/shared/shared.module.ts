@@ -4,6 +4,8 @@ import {CommonModule} from '@angular/common' // Modulos que tem as diretivas bas
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms' // nosso componente de imput utiliza tanto o ngModel quanto formControlName, e tem as diretivas basicas, o
                           // input html usa uma séria de diretivas como o *ngIf, *ngFor
+import {HTTP_INTERCEPTORS} from '@angular/common/http'  //  fase 2 - AuthInterceptor - permite adicionar ao Header da requisição acces_token para todas as requisições http
+
 import { InputComponent } from './input/input.component';
 import { RadioComponent } from './radio/radio.component';
 import { RatingComponent } from './rating/rating.component'
@@ -16,6 +18,7 @@ import {LoginService} from '../security/login/login.service'
 
 import {LoggedInGuard} from '../security/loggedin.guard'
 import {LeaveOrderGuard} from '../order/leave-order.guard'
+import {AuthInterceptor} from '../security/auth.interceptor' //  fase 2 - AuthInterceptor
 
 @NgModule ({
   declarations : [InputComponent, RadioComponent, RatingComponent],
@@ -33,7 +36,8 @@ export class SharedModule {
                   OrderService,
                   LoginService,
                   LoggedInGuard,
-                  LeaveOrderGuard]
+                  LeaveOrderGuard,
+                  {provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi:true }] //  fase 2 - AuthInterceptor - provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi:true
     }
   }
 }

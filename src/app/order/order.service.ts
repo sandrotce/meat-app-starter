@@ -44,9 +44,9 @@ export  class OrderService{
 
     let headers = new HttpHeaders()
 
-    if (this.loginservice.isLoggedIn()){
-        headers = headers.set('Authorization', `Bearer ${this.loginservice.user.accesstoken}`)
-    }
+    //if (this.loginservice.isLoggedIn()){ // isso saiu daqui porque colocamos no Interceptor, para ficar em um unico lugar e adicionar o token a todas as requizições http
+    //    headers = headers.set('Authorization', `Bearer ${this.loginservice.user.accesstoken}`)
+    //}
     return this.http.post<Order>(`${MEAT_API}/orders/`,order, {headers : headers}) // {headers : headers} isto em chaves são propriedades do método post.
                           .map(order =>order.id)
   }
