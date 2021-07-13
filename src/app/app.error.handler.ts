@@ -14,6 +14,7 @@ export class ApplicationErrorHandler extends ErrorHandler {
     super()
   }
   handeError(errorResponse: HttpErrorResponse | any){
+
      if (errorResponse instanceof HttpErrorResponse){
        const message = errorResponse.error.message
        switch(errorResponse.status){

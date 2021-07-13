@@ -3,6 +3,7 @@ import { NgModule, LOCALE_ID, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 import {ApplicationErrorHandler} from './app.error.handler'
 import {ROUTES} from './app.routes';
@@ -45,6 +46,7 @@ import { UserDetailComponent } from './header/user-detail/user-detail.component'
   //não preciso mais importar aqui o FormsModule,ReactiveFormsModule, pois estão sendo importados no sharedModule
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     SharedModule.forRoot2(),
     RouterModule.forRoot(ROUTES, {preloadingStrategy : PreloadAllModules})
