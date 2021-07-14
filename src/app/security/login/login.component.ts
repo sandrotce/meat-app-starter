@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   login() {
       this.loginservice.login(this.loginForm.value.email,
                               this.loginForm.value.password)
-                        //.subscribe( user => console.log(user)) // tem que ser .subscribe() porque o metodo this.loginservice.login e um Observable.
                         .subscribe(user =>
                                       console.log(user.name),//this.notificationService.notify(`Bem vindo, ${user.name}`)
                                      response => // HttpErrorResponse, este response já contém a resposta de erro do servidor se for o caso
